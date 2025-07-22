@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "school-shop-app",
+    "slug": "school-shop-app",
+    "scheme": "schoolshop",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "extra": {
+      "expoClientId": "869591043834-u7ant61n7qnej8mljkm082uc4rmqksa9.apps.googleusercontent.com"
+    },
+    "android": {
+      "package": "com.ryuukuokabe.schoolshopapp"
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
+  }
+}
