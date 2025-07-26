@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, Image, StyleSheet, Alert } from 'react-native';
 import { Card, Title, Paragraph, Button, Chip } from 'react-native-paper';
-import * as SecureStore from 'expo-secure-store';
 import { useCart } from '../contexts/CartContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const bentoProducts = [
   { id: '1', name: '唐揚げ弁当', price: 500, category: 'お弁当', image: require('../../assets/唐揚げ弁当.jpg') },
@@ -20,7 +20,7 @@ export default function MenuScreen() {
 
   useEffect(() => {
     (async () => {
-      const stored = await SecureStore.getItem('userInfo');
+      const stored = await AsyncStorage.getItem('userInfo');
       if (stored) setUserInfo(JSON.parse(stored));
     })();
   }, []);

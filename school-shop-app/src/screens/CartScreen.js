@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Button, StyleSheet, Alert } from 'react-native';
-import * as SecureStore from 'expo-secure-store';
 import { useCart } from '../contexts/CartContext';
 import { auth, db } from '../config/firebaseConfig';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function CartScreen() {
   const { state, dispatch } = useCart();
@@ -13,7 +13,7 @@ export default function CartScreen() {
   useEffect(() => {
     (async () => {
       try {
-        const stored = await SecureStore.getItem('userInfo');
+        const stored = await AsyncStorage.getItem('userInfo');
         if (stored) setUserInfo(JSON.parse(stored));
       } catch (e) {
         console.error('ユーザー情報取得エラー:', e);
