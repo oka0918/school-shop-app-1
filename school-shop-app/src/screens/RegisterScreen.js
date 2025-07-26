@@ -4,7 +4,7 @@ import { TextInput, Button, Text } from 'react-native-paper';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../config/firebaseConfig';
-import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -26,14 +26,11 @@ const RegisterScreen = ({ navigation }) => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log("登録成功:", userCredential.user.uid);
       
-      await SecureStore.setItem(
-        'userInfo',
-        JSON.stringify({
-          name,
-          grade,
-          class: classNumber,
-        })
-      );
+      await AsyncStorage.setItem('userInfo', JSON.stringify({
+        name,
+        grade,
+        class: classNumber,
+      }));
       
       // Firestoreに保存
       await setDoc(doc(db, 'users', userCredential.user.uid), {
